@@ -33,7 +33,7 @@ class SoapClient extends \SoapClient {
   {
     $return = parent::__soapCall($function_name, $arguments, $options, $input_headers, $output_headers);
 
-    if ($this->debug)
+    if (false && $this->debug)
     {
       $log = new \SoapLog();
 
