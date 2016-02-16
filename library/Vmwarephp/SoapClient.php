@@ -12,6 +12,14 @@ class SoapClient extends \SoapClient {
       $this->debug = $options['trace'] ? true : false;
     }
 
+    $options['stream_context'] = stream_context_create(array(
+      'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+      )
+    ));
+
     $this->wsdl = $options['location'];
 
     parent::__construct($wsdl, $options);
