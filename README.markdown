@@ -27,7 +27,7 @@ the following lines to your composer.json:
 
     {
         "require": {
-            "Wirehive/vmwarephp": "dev-master"
+            "wirehive/vmwarephp": "dev-master"
         }
     }
     

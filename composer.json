@@ -1,5 +1,5 @@
 {
-	"name":"Wirehive/vmwarephp",
+	"name":"wirehive/vmwarephp",
 	"type":"library",
 	"description":"Vmware vSphere bindings for PHP",
 	"keywords":["vmware", "php", "vsphere", "bindings", "vsphere sdk", "vmware php"],
