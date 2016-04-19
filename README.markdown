@@ -35,7 +35,7 @@ the following lines to your composer.json:
 
 You can clone the latest development branch from its github repository:
 
-    git clone git://github.com/vadimcomanescu/vmwarephp.git
+    git clone git://github.com/Wirehive/vmwarephp.git
 
 Usage
 --------
