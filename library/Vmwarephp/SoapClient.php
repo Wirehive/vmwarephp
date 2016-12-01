@@ -12,13 +12,20 @@ class SoapClient extends \SoapClient {
       $this->debug = $options['trace'] ? true : false;
     }
 
-    $options['stream_context'] = stream_context_create(array(
+    $stream_config = array(
       'ssl' => array(
-        'verify_peer' => false,
-        'verify_peer_name' => false,
+        'verify_peer'       => false,
+        'verify_peer_name'  => false,
         'allow_self_signed' => true
       )
-    ));
+    );
+
+    if (class_exists(\sfConfig::class))
+    {
+      $stream_config = array_merge($stream_config, \sfConfig::get('app_vmware_stream_config', array()));
+    }
+
+    $options['stream_context'] = stream_context_create($stream_config);
 
     $this->wsdl = $options['location'];
 
