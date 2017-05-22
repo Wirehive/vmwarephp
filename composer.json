@@ -1,9 +1,9 @@
 {
-	"name":"wirehive/vmwarephp",
+	"name":"wladikz/vmwarephp",
 	"type":"library",
 	"description":"Vmware vSphere bindings for PHP",
 	"keywords":["vmware", "php", "vsphere", "bindings", "vsphere sdk", "vmware php"],
-	"homepage":"https://github.com/Wirehive/vmwarephp",
+	"homepage":"https://github.com/wladikz/vmwarephp",
 	"license":"BSD-3-Clause",
 	"authors":[
 		{
