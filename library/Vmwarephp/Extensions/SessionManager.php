@@ -5,17 +5,25 @@ class SessionManager extends \Vmwarephp\ManagedObject {
 
 	private $cloneTicketFile;
 	private $session;
-
-	function acquireSession($userName, $password) {
-		if ($this->session) {
-			return $this->session;
-		}
-		try {
-			$this->session = $this->acquireSessionUsingCloneTicket();
-		} catch (\Exception $e) {
-			$this->session = $this->acquireANewSession($userName, $password);
-		}
-		return $this->session;
+        private $userName;
+                
+        function acquireSession($userName, $password) {
+		if (empty($this->userName)) {
+                    $this->userName=$userName;
+                }
+                if ($this->userName === $userName) {
+                    if ($this->session) {
+                            return $this->session;
+                    }
+                    try {
+                            $this->session = $this->acquireSessionUsingCloneTicket();
+                    } catch (\Exception $e) {
+                            $this->session = $this->acquireANewSession($userName, $password);
+                    }
+                } else {
+                    $this->session = $this->acquireANewSession($userName, $password);
+                }
+                return $this->session;
 	}
 
 	private function acquireSessionUsingCloneTicket() {
@@ -47,8 +55,21 @@ class SessionManager extends \Vmwarephp\ManagedObject {
 
 	private function getCloneTicketFile() {
 		if (!$this->cloneTicketFile) {
-			$this->cloneTicketFile = __DIR__ . '/../.clone_ticket.cache';
+			$this->cloneTicketFile = __DIR__ . '/../.' . $this->getUserNameForFileName() .'_clone_ticket.cache';
 		}
 		return $this->cloneTicketFile;
 	}
+        private function getUserNameForFileName() {
+            if (empty($this->userName)) {
+                throw new Exception('UserName is Empty');
+            }
+            if (strpos($this->userName, "\\") !== FALSE) {
+                $tmpUser= explode("\\", $this->userName)[1];
+            } elseif (strpos($this->userName, "@") !== FALSE) {
+                $tmpUser= explode("@", $this->userName)[0];
+            } else {
+                $tmpUser= $this->userName;
+            }
+            return $tmpUser;
+        }
 }
